@@ -53,8 +53,8 @@ const Likes = () => {
     fetchAllEvents();
   }, []);
 
+  const currentUser = localStorage.getItem("user");
   const getLikedEventsDetails = () => {
-    const currentUser = localStorage.getItem("user");
     const likedEventsDetails = likedEvents.filter(
       (likedEvent) => likedEvent.user === currentUser
     );
@@ -70,6 +70,14 @@ const Likes = () => {
   };
 
   const userLikedEvents = getLikedEventsDetails();
+
+
+  const handleDelte = (deleteid) =>{
+    setLikedEvents(prevLikedEvents =>
+      prevLikedEvents.filter(event => event.eventid !== deleteid)
+    );
+    userLikedEvents = likedEvents;
+  }
 
   return (
     <>
@@ -93,7 +101,8 @@ const Likes = () => {
               time={event.time}
               date={event.date}
               location={event.location}
-              user={event.user}
+              user={currentUser}
+              onDelete={handleDelte}
             />
           ))
         )}

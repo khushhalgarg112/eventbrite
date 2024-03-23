@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import Person, Auth, Event, Like
-        
+
+from .models import Auth, Event, Like, Person
+
+
 class AuthSerializer(serializers.ModelSerializer):
     class Meta:
         model = Auth

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CiHeart } from "react-icons/ci";
 
 // This component is the main card component used at home page and myevent
 const EventCard = ({

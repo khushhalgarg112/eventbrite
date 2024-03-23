@@ -94,3 +94,16 @@ class LikeSaveView(APIView):
 
         serializer = LikeSerializer(likes, many=True)
         return Response(serializer.data)
+    def delete(self, request):
+        id = request.data.get('eventid')
+        user = request.data.get('user')
+        try:
+            like_instance = Like.objects.get(eventid=id, user=user)
+            like_instance.delete()
+            return Response({"message": "Data deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        except Like.DoesNotExist as e:
+            print(f"Error: {e}")
+            print(f"eventid: {id}, user: {user}")
+            return Response({"error": "Data not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
